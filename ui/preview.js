@@ -15,7 +15,7 @@ export function showcountries(data) {
        <div id="card"  data-id="${c.id}"  class="flex items-center gap-3 p-3 bg-[#171b20] rounded-xl border border-[#252a30] hover:bg-[#20252b] transition cursor-pointer">
                  
                 <img src="${c.flagUrl}" alt="countriesimgs" class="w-12 h-12 object-contain bg-white rounded-lg p-1">
-
+                
                 <div class="flex-1">
                     <h1 class="text-white text-sm ">
                         ${c.name}
@@ -34,7 +34,7 @@ export function showcountries(data) {
 
             </div>
       `
-
+        console.log(c.flagUrl);
 
     });
 }
@@ -58,10 +58,6 @@ export function showcanals(chine){
 
                 </div>
 
-
-                <span class="text-lime-400 text-xs">
-                    ●
-                </span>
 
 
             </div>
