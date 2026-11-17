@@ -1,4 +1,7 @@
+import { updatefavoriseandisBlacklisted } from "../service/api.js";
+
 import { showcanals, showcountries } from "../ui/preview.js";
+
 
 
 
@@ -36,4 +39,74 @@ let countries = JSON.parse(localStorage.getItem("cuntry"));
         
 })
  }
+export function favoriteChannels() {
 
+    document.getElementById("chanls").addEventListener("click", async function(e) {
+
+        const button = e.target.closest('[data-action="favorite"]');
+           
+
+        
+
+        const id = button.dataset.id;
+        
+        const channel = channls.find(ch =>  (ch.id) === id);
+
+        
+
+        const newValue = !channel.isFavorite;
+
+        try {
+            const updatedChannel = await updatefavoriseandisBlacklisted(id, {
+                isFavorite: newValue
+            });
+
+            channel.isFavorite = updatedChannel.isFavorite;
+
+            localStorage.setItem("channls", JSON.stringify(channls));
+
+            showcanals(channls);
+
+        } catch (error) {
+            console.log("Erreur lors de la mise à jour du favori :", error);
+        }
+    });
+}
+
+favoriteChannels();
+
+
+export function BlacklistChannels() {
+
+    document.getElementById("chanls").addEventListener("click", async function(e) {
+
+        const buttons = e.target.closest('[data-action="blacklist"]');
+          
+        
+
+        const id = buttons.dataset.id
+        
+
+        const channel = channls.find(ch =>  (ch.id) === id);
+
+        
+
+        const newValue = !channel.isBlacklisted;
+
+        try {
+            const updatedChannel = await  updatefavoriseandisBlacklisted(id, {
+                isBlacklisted: newValue
+            });
+
+            channel.isBlacklisted = updatedChannel.isBlacklisted;
+
+            localStorage.setItem("channls", JSON.stringify(channls));
+
+            showcanals(channls);
+
+        } catch (error) {
+            console.log("Erreur lors de la mise à jour du favori :", error);
+        }
+    });
+}
+BlacklistChannels();
