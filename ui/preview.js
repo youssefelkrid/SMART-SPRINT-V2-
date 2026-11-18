@@ -73,6 +73,13 @@ export function showcanals(chine) {
     class ="text-xs ${ch.isFavorite ? "hidden" : ""} ">
       ${ch.isBlacklisted ? "🔓" : "🚫"}
 </button>
+  <button data-id="${ch.id}" data-action="delete"   class="${ch.isBlacklisted ? '' : 'hidden'}" >
+
+  <img 
+        src="./img/supprimer.png"
+        alt="delete"
+        class="w-5 h-5">
+  </button>
 
 
             </div>

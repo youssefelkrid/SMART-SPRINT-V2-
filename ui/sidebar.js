@@ -8,7 +8,7 @@ export function getcode() {
     pays.addEventListener("click", function (e) {
         const id = e.target.closest("[data-id]")?.getAttribute("data-id");
 
-        const result = cannal.filter(c => c.countryId === id);
+        const result = cannal.filter(c => c.countryId === id && c.isBlacklisted === false);
 
         console.log(result);
 
