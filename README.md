@@ -857,3 +857,38 @@ formulaires, protéger les données, traiter les dates, gérer les
 L'objectif est de savoir non seulement utiliser les méthodes et
 bibliothèques, mais aussi expliquer leur rôle, identifier leurs limites
 et choisir une solution adaptée au besoin du projet.
+
+Résumé : Méthodes HTTP avec Fetch
+
+1. Formulaires HTML
+
+Ils ne supportent que GET et POST, car ils fonctionnent par navigation du navigateur.
+Pour PUT, PATCH et DELETE, il faut utiliser fetch en JavaScript.
+
+2. Fetch
+
+js
+fetch(url, {
+  method: "PATCH",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ email: "new@mail.com" }),
+});
+Verbe	Usage	Body
+POST	Créer	Oui
+PUT	Remplacer tout	Oui (complet)
+PATCH	Modifier une partie	Oui (partiel)
+DELETE	Supprimer	Non
+
+3. Architecture
+
+apiService.js contient les fonctions CRUD (createUser, updateUser, deleteUser...).
+Les gestionnaires d’événements UI appellent ces fonctions.
+Trois états sont à gérer : loading, success et error.
+
+Réponses aux questions
+
+DELETE dans un formulaire ? Impossible, car HTML ne définit que GET et POST.
+PATCH ou PUT ? PATCH quand on modifie un seul champ, PUT quand on remplace toute la ressource.
+Erreur 500 ? fetch ne lance pas d’erreur dans ce cas. Il faut tester response.ok, puis faire throw et afficher un message d’erreur.
+
+Si tu veux, je peux aussi te le mettre dans un fichier README.md plus court.

@@ -74,17 +74,14 @@ form.addEventListener("submit", async function (e) {
 
   const id = Number(document.getElementById("id").value);
   const name = document.getElementById("name").value;
-  const countryId = Number(document.getElementById("countryId").value);
+  const countryId = document.getElementById("countryId").value;
   const logo = document.getElementById("logo").value;
 
   if (id === "" || name === "" || countryId === "" || logo === "") {
     alert(" remplire tout les champs ");
     return;
   }
-  // if (canal === null) {
-  //   canal = [];
-  // }
-
+  
 
 
   const chaine = {
@@ -110,8 +107,8 @@ form.addEventListener("submit", async function (e) {
     showcanals(canal);
 
 
+    form.value = "" ;
 
-    form.reset();
   }
 
 
