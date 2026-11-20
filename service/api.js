@@ -80,6 +80,7 @@ export async function Ajouterchannel(newchannel){
     const response = await fetch(`https://6afad648730c1d152f329614.mockapi.io/api/v1/cannal/`,
     {
         method : "POST",
+        headers : {"content-type" : "application/json"},
         body : JSON.stringify(newchannel)
     }
 );
