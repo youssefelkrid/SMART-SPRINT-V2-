@@ -64,7 +64,7 @@ export async function deleteChannel(id) {
     const response = await fetch(
         `https://6afad648730c1d152f329614.mockapi.io/api/v1/cannal/${id}`,
         {
-            method: "DELETE"
+            method: "DELETE",
         }
     );
 
@@ -74,3 +74,21 @@ export async function deleteChannel(id) {
 
     return true;
 }
+
+export async function Ajouterchannel(newchannel){
+   
+    const response = await fetch(`https://6afad648730c1d152f329614.mockapi.io/api/v1/cannal/`,
+    {
+        method : "POST",
+        body : JSON.stringify(newchannel)
+    }
+);
+ if(!response.ok){
+    throw new Error("Error de serveur ")
+ }
+   return await response.json();
+      
+};
+ export async function getNEWCHANNEL() {
+    
+ }
