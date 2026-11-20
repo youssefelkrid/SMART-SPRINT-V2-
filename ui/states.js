@@ -1,3 +1,5 @@
+
+import exportchaine, { Ajouterchannel } from "../service/api.js";
 import { getepg, showcanals } from "./preview.js";
 
 
@@ -8,63 +10,21 @@ const epg = document.getElementById("epg");
 const favori = document.getElementById("favorite");
 const bkliste = document.getElementById("blacklist");
 const Ajouterchine = document.getElementById("Ajoutercannal")
-
-
-
-
-Ajouterchine.addEventListener("click", function (e) {
-  e.target;
-  const Ajouterpopup = document.createElement("div");
-  Ajouterpopup.id = "popup";
-  Ajouterpopup.classList = "hidden flex justify-center items-center  bg-black-100  fixed inset-0"
-  Ajouterpopup.innerHTML += `
-          <form action="" class="bg-white p-6 w-96 rounded shadow">
-
-      <h1 class="text-2xl font-bold text-center mb-4">ADD NEW channel</h1>
-
-      <div class="mb-3">
-        <label for="id" class="block">numéro</label>
-        <input id="id" type="text" placeholder="numéro" class="border w-full p-2">
-      </div>
-
-      <div class="mb-3">
-        <label for="nom" class="block"> nom</label>
-        <input id="nom" type="text" placeholder="nom" class="border w-full p-2">
-      </div>
-
-      <div class="mb-3">
-        <label for="prix" class="block">catégorie</label>
-        <input id="prix" type="text" placeholder="catégorie" class="border w-full p-2">
-      </div>
-
-      <div class="mb-3">
-        <label for="img" class="block">logo</label>
-        <input id="img" type="text" placeholder="logo" class="border w-full p-2">
-      </div>
-       
-      <div class="flex gap-2">
-        <button id="btnAjouter" type="submit" class="bg-red-600 text-white p-2 w-full rounded">AJOUTER</button>
-        <button id="btnfermer" type="button" class="bg-gray-300 p-2 w-full rounded">ANNULLER</button>
-      </div>
-
-    </form>
-       `
-  document.body.appendChild(Ajouterpopup);
-
-  const popup = document.getElementById("popup");
-const close = document.getElementById("btnfermer");
+const popup = document.getElementById("popup");
+const btnAjouter = document.getElementById("btnAjouter");
+const form = document.getElementById("form");
+const btnfermer = document.getElementById("btnfermer")
 
 Ajouterchine.addEventListener("click", () => {
   popup.classList.remove("hidden")
   popup.classList.add("fixed");
 });
-
-close.addEventListener("click", () => {
+btnfermer.addEventListener("click", () => {
   popup.classList.add("hidden")
   popup.classList.remove("fixed")
-});
 
 })
+
 
 
 
@@ -106,3 +66,57 @@ export function getphoto() {
   });
 
 }
+
+
+
+form.addEventListener("submit", async function (e) {
+  e.preventDefault();
+
+  const id = Number(document.getElementById("id").value);
+  const name = document.getElementById("name").value;
+  const countryId = Number(document.getElementById("countryId").value);
+  const logo = document.getElementById("logo").value;
+
+  if (id === "" || name === "" || countryId === "" || logo === "") {
+    alert(" remplire tout les champs ");
+    return;
+  }
+  // if (canal === null) {
+  //   canal = [];
+  // }
+
+
+
+  const chaine = {
+    id: canal.length + 1,
+    name: name,
+    countryId: countryId,
+    logo: logo ,
+    isFavorite : false ,
+    isBlacklisted :  false
+    
+
+  };
+
+  try {
+
+    const nouvelleChaine = await Ajouterchannel(chaine);
+    canal.push(nouvelleChaine);
+
+
+    localStorage.setItem("canal", JSON.stringify(canal));
+    canal = await exportchaine();
+
+    showcanals(canal);
+
+
+
+    form.reset();
+  }
+
+
+  catch (e) {
+    console.log("error de surveur ", e);
+  }
+
+});
